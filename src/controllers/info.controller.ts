@@ -5,16 +5,9 @@ const db = require('../models/index')
 const Complaint: Model<any> = db.complaint
 const Customer: Model<any> = db.customer
 
-async function generateUniqueId() {
-  const count = await Complaint.countDocuments()
-  const sixDigitId = (count + 1).toString().padStart(6, '0')
-  return sixDigitId
-}
-
 async function addComplaint(req: Request, res: Response) {
   try {
-    const uniqueId = await generateUniqueId()
-    const complaintData = { ...req.body, complaintId: uniqueId }
+    const complaintData = { ...req.body }
     const complaint = new Complaint(complaintData)
     const savedInfo = await complaint.save()
     return res.json(savedInfo)

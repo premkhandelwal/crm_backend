@@ -2,13 +2,22 @@ import { Mongoose } from 'mongoose'
 
 module.exports = (mongoose: Mongoose, Schema) => {
   const complaintSchema = Schema({
-    bmsClientName: {
-      type: mongoose.Schema.Types.String,
+    clientId: {
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
     },
-    bmsName: {
-      type: mongoose.Schema.Types.String,
+    bmsId: {
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
+    },
+    batchId: {
+      type: mongoose.Schema.Types.ObjectId,
+    },
+    harnessId: {
+      type: mongoose.Schema.Types.Array,
+    },
+    make: {
+      type: mongoose.Schema.Types.ObjectId,
     },
     returnDate: {
       type: mongoose.Schema.Types.Date,
@@ -16,18 +25,22 @@ module.exports = (mongoose: Mongoose, Schema) => {
     complaint: {
       type: mongoose.Schema.Types.String,
     },
-    batchNo: {
+    observation: {
       type: mongoose.Schema.Types.String,
     },
-    harnessDetails: {
-      type: mongoose.Schema.Types.Array,
-    },
-    make: {
+    comment: {
       type: mongoose.Schema.Types.String,
     },
-    customerId: {
+    solution: {
       type: mongoose.Schema.Types.String,
     },
+    testingDoneBy: {
+      type: mongoose.Schema.Types.String,
+    },
+    status: {
+      type: mongoose.Schema.Types.String,
+    }
+
   })
   const complaint = mongoose.model('complaint', complaintSchema)
   return complaint

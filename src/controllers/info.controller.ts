@@ -3,7 +3,27 @@ import { Model } from 'mongoose'
 
 const db = require('../models/index')
 const Complaint: Model<any> = db.complaint
-const Customer: Model<any> = db.customer
+const Batch: Model<any> = db.batch
+
+async function getBatchForCustomer(req: Request, res: Response) {
+  try {
+    const custId = req.query["customerId"];
+    console.log(custId);
+    
+    const batchData = await Batch.find({ customerId: custId });
+
+    const batchListJson = batchData.map((batch) => {
+      const batchObj = batch.toObject();
+      batchObj.id = batchObj._id;
+      return batchObj;
+    });
+
+    return res.status(200).json(batchListJson);
+  } catch (error) {
+    console.error(error)
+    return res.status(500).json(error)
+  }
+}
 
 async function addComplaint(req: Request, res: Response) {
   try {
@@ -19,15 +39,30 @@ async function addComplaint(req: Request, res: Response) {
 
 async function fetchComplaints(req: Request, res: Response) {
   try {
-    const Complaints = await Complaint.find({})
-    res.status(200).json(Complaints)
+    const custId = req.query["customerId"];
+    console.log(custId);
+    
+    const Complaints = await Complaint.find({customerId: custId})
+    return res.status(200).json(Complaints)
   } catch (error) {
-    res.status(401).json(error)
+    return res.status(401).json(error)
   }
 }
+
+async function addBmsInBatch(req: Request, res: Response) {
+  try {
+    const batchId = req.body.id;
+    const batchData = await Batch.findByIdAndUpdate(batchId, { bmsList: req.body.bmsList }, { new: true });
+    return res.status(200).json(batchData);
+  } catch (error) {
+    return res.status(401).json(error);
+  }
+}
+
 
 export const info = {
   addComplaint: addComplaint,
   fetchComplaints: fetchComplaints,
-  // addNotificationToken: addNotificationToken,
+  getBatchForCustomer: getBatchForCustomer,
+  addBmsInBatch: addBmsInBatch
 }

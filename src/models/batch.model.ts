@@ -8,14 +8,8 @@ module.exports = (mongoose: Mongoose, Schema) => {
         batchName: {
             type: mongoose.Schema.Types.String,
         },
-        bmsId: {
-            type: mongoose.Schema.Types.ObjectId,
-        },
-        harnessDetails: {
+        bmsList: {
             type: mongoose.Schema.Types.Array
-        },
-        makeId: {
-            type: mongoose.Schema.Types.ObjectId,
         },
         customerId: {
             type: mongoose.Schema.Types.ObjectId,

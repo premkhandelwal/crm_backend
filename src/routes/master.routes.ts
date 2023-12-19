@@ -11,7 +11,6 @@ router.get('/getAllCustomers', masters.getAllUsers)
 router.post('/addBatch', masters.addBatch)
 router.put('/editBatch', masters.editBatch)
 router.delete('/deleteBatch', masters.deleteBatch)
-router.get('/getBatch', masters.getBatch)
 router.get('/getAllBatch', masters.getAllBatch)
 
 router.post('/addMake', masters.addMake)

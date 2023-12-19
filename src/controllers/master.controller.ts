@@ -231,6 +231,8 @@ async function addBms(req: Request, res: Response) {
   const bmsData = {
     name: req.body.name,
     details: req.body.details,
+    harnessDetails: req.body.harnessDetails,
+    makeId: req.body.makeId,
   }
   const bms = new Bms(bmsData)
   const savedBms = await bms.save()
@@ -305,11 +307,7 @@ async function addBatch(req: Request, res: Response) {
   try {
     const batchData = {
       batchName: req.body.batchName,
-      bmsId: req.body.bmsId,
-      harnessDetails: req.body.harnessDetails,
-      makeId: req.body.makeId,
       customerId: req.body.customerId,
-
     }
     const batch = new Batch(batchData)
     const savedBatch = await batch.save()
@@ -370,23 +368,7 @@ async function deleteBatch(req: Request, res: Response) {
 
 
 
-async function getBatch(req: Request, res: Response) {
-  try {
-    const custId = req.body.customerId;
-    const batchData = await Batch.find({ customerId: custId });
 
-    const batchListJson = batchData.map((batch) => {
-      const batchObj = batch.toObject();
-      batchObj.id = batchObj._id;
-      return batchObj;
-    });
-
-    res.status(200).json(batchListJson);
-  } catch (error) {
-    console.error(error)
-    return res.status(500).json(error)
-  }
-}
 async function getAllBatch(req: Request, res: Response) {
   try {
     const custId = req.body.customerId;
@@ -414,7 +396,6 @@ export const masters = {
   addBatch: addBatch,
   editBatch: editBatch,
   deleteBatch: deleteBatch,
-  getBatch: getBatch,
   getAllBatch: getAllBatch,
   addMake: addMake,
   editMake: editMake,

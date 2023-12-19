@@ -8,6 +8,12 @@ module.exports = (mongoose: Mongoose, Schema) => {
         name: {
             type: mongoose.Schema.Types.String,
         },
+        harnessDetails: {
+            type: mongoose.Schema.Types.Array
+        },
+        makeId: {
+            type: mongoose.Schema.Types.ObjectId,
+        },
         details: {
             type: mongoose.Schema.Types.String,
         },

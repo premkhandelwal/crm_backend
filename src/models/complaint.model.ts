@@ -2,7 +2,7 @@ import { Mongoose } from 'mongoose'
 
 module.exports = (mongoose: Mongoose, Schema) => {
   const complaintSchema = Schema({
-    clientId: {
+    customerId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
     },
@@ -11,12 +11,6 @@ module.exports = (mongoose: Mongoose, Schema) => {
       required: true,
     },
     batchId: {
-      type: mongoose.Schema.Types.ObjectId,
-    },
-    harnessId: {
-      type: mongoose.Schema.Types.Array,
-    },
-    make: {
       type: mongoose.Schema.Types.ObjectId,
     },
     returnDate: {

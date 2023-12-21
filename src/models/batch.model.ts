@@ -9,7 +9,7 @@ module.exports = (mongoose: Mongoose, Schema) => {
             type: mongoose.Schema.Types.String,
         },
         bmsList: {
-            type: mongoose.Schema.Types.Array
+            type: mongoose.Schema.Types.Mixed
         },
         customerId: {
             type: mongoose.Schema.Types.ObjectId,

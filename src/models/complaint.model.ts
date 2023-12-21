@@ -6,12 +6,16 @@ module.exports = (mongoose: Mongoose, Schema) => {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
     },
+    batchId: {
+      type: mongoose.Schema.Types.ObjectId,
+    },
     bmsId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
     },
-    batchId: {
-      type: mongoose.Schema.Types.ObjectId,
+    bmsSerialNo: {
+      type: mongoose.Schema.Types.String,
+      required: true,
     },
     returnDate: {
       type: mongoose.Schema.Types.Date,

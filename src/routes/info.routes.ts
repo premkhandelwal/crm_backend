@@ -7,6 +7,7 @@ const router: Router = Router()
 
 router.post('/addComplaint', info.addComplaint)
 router.get('/fetchComplaints', info.fetchComplaints)
+router.put('/updateComplaintStatus', info.updateComplaintStatus)
 
 router.get('/getBatchForCustomer', info.getBatchForCustomer)
 

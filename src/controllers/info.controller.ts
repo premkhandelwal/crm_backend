@@ -9,7 +9,7 @@ async function getBatchForCustomer(req: Request, res: Response) {
   try {
     const custId = req.query["customerId"];
     console.log(custId);
-    
+
     const batchData = await Batch.find({ customerId: custId });
 
     const batchListJson = batchData.map((batch) => {
@@ -41,9 +41,27 @@ async function fetchComplaints(req: Request, res: Response) {
   try {
     const custId = req.query["customerId"];
     console.log(custId);
-    
-    const Complaints = await Complaint.find({customerId: custId})
-    return res.status(200).json(Complaints)
+
+    const Complaints = await Complaint.find({ customerId: custId })
+    const complaintJson = Complaints.map((complaint) => {
+      const complaintObj = complaint.toObject();
+      complaintObj.id = complaintObj._id;
+      return complaintObj;
+    });
+    return res.status(200).json(complaintJson)
+  } catch (error) {
+    return res.status(401).json(error)
+  }
+}
+
+async function updateComplaintStatus(req: Request, res: Response) {
+  try {
+    const complaintId = req.body.id;
+    console.log(req.body);
+
+    const updatedComplaint = await Complaint.findByIdAndUpdate(complaintId, { status: req.body.status }, { new: true })
+    updatedComplaint.id = updatedComplaint._id;
+    return res.status(200).json(updatedComplaint)
   } catch (error) {
     return res.status(401).json(error)
   }
@@ -64,5 +82,6 @@ export const info = {
   addComplaint: addComplaint,
   fetchComplaints: fetchComplaints,
   getBatchForCustomer: getBatchForCustomer,
-  addBmsInBatch: addBmsInBatch
+  addBmsInBatch: addBmsInBatch,
+  updateComplaintStatus: updateComplaintStatus
 }

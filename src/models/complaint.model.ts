@@ -2,6 +2,9 @@ import { Mongoose } from 'mongoose'
 
 module.exports = (mongoose: Mongoose, Schema) => {
   const complaintSchema = Schema({
+    id: {
+      type: mongoose.Schema.Types.String,
+    },
     customerId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
